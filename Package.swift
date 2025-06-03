@@ -8,11 +8,11 @@ let package = Package(
     platforms: [.macOS(.v15), .iOS(.v15)],
     products: [
         .library(name: "VKSwiftUI", targets: ["VKSwiftUI"]),
-        .executable(name: "VKSwiftUICLI", targets: ["CLI"]),
+        .executable(name: "VKSwiftUICLI", targets: ["VKSwiftUICLI"]),
     ],
     targets: [
         .target(name: "VKSwiftUI"),
-        .executableTarget(name: "CLI", dependencies: ["VKSwiftUI"]),
+        .executableTarget(name: "VKSwiftUICLI", dependencies: ["VKSwiftUI"]),
         .testTarget(name: "VKSwiftUITests", dependencies: ["VKSwiftUI"]),
     ]
 )
