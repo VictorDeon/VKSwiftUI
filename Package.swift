@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "VKSwiftUI",
-    platforms: [.macOS(.v15), .iOS(.v15)],
+    platforms: [.macOS(.v13), .iOS(.v15)],
     products: [
         .library(name: "VKSwiftUI", targets: ["VKSwiftUI"]),
         .executable(name: "VKSwiftUICLI", targets: ["VKSwiftUICLI"]),
