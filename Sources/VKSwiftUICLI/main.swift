@@ -16,5 +16,5 @@ struct TextContent: View {
 
 let app = NSApplication.shared
 
-TerminalSwiftUI.showWindow(TextContent(), by: app)
+TerminalSwiftUI.showWindow(TextContent(), by: app, mask: [.titled, .resizable])
 app.run()

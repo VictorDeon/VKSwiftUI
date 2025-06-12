@@ -2,13 +2,13 @@ import SwiftUI
 
 class HostingWindowController<V: View>: NSWindowController, NSWindowDelegate {
     // Cria a janela SwiftUI
-    init(app: NSApplication, rootView: V, title: String) {
+    init(app: NSApplication, rootView: V, title: String, mask: NSWindow.StyleMask) {
         // transformamos o CLI num app com Dock e foco
         app.setActivationPolicy(.regular)
 
         let win = NSWindow(
             contentRect: NSRect(x: 0, y: 0, width: 300, height: 100),
-            styleMask: [.titled, .closable, .resizable],
+            styleMask: mask,
             backing: .buffered,
             defer: false
         )
@@ -46,8 +46,13 @@ public struct TerminalSwiftUI {
     ///     - view: Swift UI component. (required.)
     ///     - app: NSApplication singleton app. (required)
     ///     - title: Window title
-    @MainActor public static func showWindow<V: View>(_ view: V, by app: NSApplication, title: String = "Window") {
-        let controller = HostingWindowController(app: app, rootView: view, title: title)
+    @MainActor public static func showWindow<V: View>(
+        _ view: V,
+        by app: NSApplication,
+        title: String = "Window",
+        mask: NSWindow.StyleMask = [.titled, .closable, .resizable]
+    ) {
+        let controller = HostingWindowController(app: app, rootView: view, title: title, mask: mask)
         windowControllers.append(controller)
         controller.showWindow(nil)
     }
