@@ -1,5 +1,23 @@
 import SwiftUI
 
+// 1. Um ViewModifier que injeta a janela no Environment
+public struct WindowAccessor: NSViewRepresentable {
+    public let callback: (NSWindow) -> Void
+    public init(callback: @escaping (NSWindow) -> Void) {
+        self.callback = callback
+    }
+    public func makeNSView(context: Context) -> NSView {
+        let view = NSView()
+        DispatchQueue.main.async {
+            if let window = view.window {
+                callback(window)
+            }
+        }
+        return view
+    }
+    public func updateNSView(_ nsView: NSView, context: Context) { }
+}
+
 class HostingWindowController<V: View>: NSWindowController, NSWindowDelegate {
     // Cria a janela SwiftUI
     init(app: NSApplication, rootView: V, title: String, mask: NSWindow.StyleMask) {
